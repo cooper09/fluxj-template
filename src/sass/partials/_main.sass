@@ -1,0 +1,47 @@
+* 
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+  box-sizing: border-box
+
+html 
+  height: 100%
+
+body
+  // background: url('https://66.media.tumblr.com/d51a2a2502f70238adbb0c242c4e89dd/tumblr_ocqdob8xcZ1s8iqo7o1_1280.gif') no-repeat
+  //background: url('../img/background.jpg')
+  background-size: 100% 100%
+  //background-size: cover
+  +at-breakpoint($phone)
+    background: black
+
+.pageOne 
+  width: 240px
+  height: 320px
+  background: #333
+  padding: 1em
+  color: yellow
+  margin-top: 1em
+  margin-left: auto
+  margin-right: auto
+  -webkit-transition: 1s right ease
+  -moz-transition: 1s right ease
+  -ms-transition: 1s right ease
+  -o-transition: 1s right ease
+  transition: 1s right ease
+  box-shadow: 0 0 5px rgba(0, 0, 0, .5)
+  
+.pageTwo
+  width: 320px
+  height: 240px
+  background: red
+  padding: 1em
+  color: yellow
+  margin-top: 1em
+  margin-left: auto
+  margin-right: auto
+  -webkit-transition: 1s left ease
+  -moz-transition: 1s left ease
+  -ms-transition: 1s left ease
+  -o-transition: 1s left ease
+  transition: 1s left ease
+  box-shadow: 0 0 5px rgba(0, 0, 0, .5)

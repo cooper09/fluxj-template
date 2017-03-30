@@ -1,0 +1,58 @@
+/* line 1, ../sass/partials/_main.sass */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 6, ../sass/partials/_main.sass */
+html {
+  height: 100%;
+}
+
+/* line 9, ../sass/partials/_main.sass */
+body {
+  background-size: 100% 100%;
+}
+@media (max-width: 651px) {
+  /* line 9, ../sass/partials/_main.sass */
+  body {
+    background: black;
+  }
+}
+
+/* line 17, ../sass/partials/_main.sass */
+.pageOne {
+  width: 240px;
+  height: 320px;
+  background: #333;
+  padding: 1em;
+  color: yellow;
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transition: 1s right ease;
+  -moz-transition: 1s right ease;
+  -ms-transition: 1s right ease;
+  -o-transition: 1s right ease;
+  transition: 1s right ease;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* line 33, ../sass/partials/_main.sass */
+.pageTwo {
+  width: 320px;
+  height: 240px;
+  background: red;
+  padding: 1em;
+  color: yellow;
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transition: 1s left ease;
+  -moz-transition: 1s left ease;
+  -ms-transition: 1s left ease;
+  -o-transition: 1s left ease;
+  transition: 1s left ease;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
