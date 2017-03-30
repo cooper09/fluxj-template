@@ -12,16 +12,18 @@ html {
 
 /* line 9, ../sass/partials/_main.sass */
 body {
+  background: url("../img/BlackPanther_6cover-Recovered.jpg");
   background-size: 100% 100%;
 }
 @media (max-width: 651px) {
   /* line 9, ../sass/partials/_main.sass */
   body {
     background: black;
+    background: url("../img/mobile-version.jpg");
   }
 }
 
-/* line 17, ../sass/partials/_main.sass */
+/* line 19, ../sass/partials/_main.sass */
 .pageOne {
   width: 240px;
   height: 320px;
@@ -39,7 +41,7 @@ body {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-/* line 33, ../sass/partials/_main.sass */
+/* line 35, ../sass/partials/_main.sass */
 .pageTwo {
   width: 320px;
   height: 240px;
