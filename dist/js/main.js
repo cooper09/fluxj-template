@@ -22528,7 +22528,8 @@ function getAppState(){
 		//app: AppStore.getState(),
 		pages: AppStore.getPages(),
 		oneVisible: AppStore.getOneVisible(),
-		twoVisible: AppStore.getTwoVisible()
+		twoVisible: AppStore.getTwoVisible(),
+		getBgImg: AppStore.getBgImg()
 	}
 }
 
@@ -22590,9 +22591,9 @@ var ComponentOne = React.createClass({displayName: "ComponentOne",
 		return (
 			React.createElement("div", null, 
 				
-				React.createElement("div", {className: "pageOne center option animated zoomInUp"}, "page one", 
-					React.createElement("h1", {className: "name"}, this.props.pages.name), 
-					React.createElement("img", {src: this.props.pages.avatar})
+				React.createElement("div", {className: "pageOne center option animated zoomInUp"}, "Hudlin's selection of the Month'", 
+					React.createElement("h1", {className: "name"}, this.props.pages.name)
+				
 				)
 			)
 			);
@@ -22680,6 +22681,8 @@ var _pages = [];
 
 var _oneVisible = false, _twoVisible = false;
 
+var _image = "image1";
+
 
 // Method to load product data from mock API
 function loadPageData(data) {
@@ -22700,6 +22703,13 @@ function setTwoVisible(visible) {
 }
 
 var AppStore = assign({}, EventEmitter.prototype, {
+
+
+	getBgImg: function (image) {
+		console.log("getBgImage - set background to: " +  _image );
+		return _image;
+	},
+
 	getPages: function () {
 	    return _pages;
 	  },
@@ -22748,9 +22758,7 @@ AppDispatcher.register(function(payload){
 	  	  console.log("Show page two: ", payload );
 	      _visible=true;
 	      setTwoVisible(_visible);
-	 	break
-
-
+	 	break;
 	}//end switch
 
 	AppStore.emitChange();

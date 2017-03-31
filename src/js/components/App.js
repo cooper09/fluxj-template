@@ -12,7 +12,8 @@ function getAppState(){
 		//app: AppStore.getState(),
 		pages: AppStore.getPages(),
 		oneVisible: AppStore.getOneVisible(),
-		twoVisible: AppStore.getTwoVisible()
+		twoVisible: AppStore.getTwoVisible(),
+		getBgImg: AppStore.getBgImg()
 	}
 }
 

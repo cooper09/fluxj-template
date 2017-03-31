@@ -11,9 +11,9 @@ var ComponentOne = React.createClass({
 		return (
 			<div>
 				
-				<div className='pageOne center option animated zoomInUp'>page one
+				<div className='pageOne center option animated zoomInUp'>Hudlin's selection of the Month'
 					<h1 className="name">{this.props.pages.name }</h1>
-					<img src={this.props.pages.avatar } />
+				
 				</div>
 			</div>
 			);
