@@ -23,6 +23,14 @@ loadPages: function (data) {
       actionType: AppConstants.RECEIVE_DATA,
       data: data
     	})
+	},
+
+onLoad: function (data) {
+	console.log("AppActions.onLoad: ", data );
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.ON_LOAD,
+      data: data
+    	})
 	}
 
 }//end AppActions

@@ -22508,6 +22508,14 @@ loadPages: function (data) {
       actionType: AppConstants.RECEIVE_DATA,
       data: data
     	})
+	},
+
+onLoad: function (data) {
+	console.log("AppActions.onLoad: ", data );
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.ON_LOAD,
+      data: data
+    	})
 	}
 
 }//end AppActions
@@ -22529,7 +22537,7 @@ function getAppState(){
 		pages: AppStore.getPages(),
 		oneVisible: AppStore.getOneVisible(),
 		twoVisible: AppStore.getTwoVisible(),
-		getBgImg: AppStore.getBgImg()
+		bgImg: AppStore.getBgImg()
 	}
 }
 
@@ -22542,6 +22550,9 @@ var App = React.createClass({displayName: "App",
 
 	componentDidMount: function(){
 		AppStore.addChangeListener(this._onChange);
+		// cooper  - set the background image
+	
+		AppActions.onLoad('Load background image');
 	},
 
 	componentUnmount: function(){
@@ -22556,14 +22567,28 @@ var App = React.createClass({displayName: "App",
       AppActions.showTwo('Button Two click');
     },
 	render: function(){
+		//set the background image
+		var imgUrl = this.state.bgImg;
+		//console.log("App render -  imgUrl: " + imgUrl );
+
+		var divStyle = {
+			backgroundImage: 'url(' + imgUrl + ')',
+			backgroundSize: 'cover',
+			color: 'red'
+		}
+		
 		return(
 			React.createElement("div", null, 
 				React.createElement("p", null, "React Flux Template"), 
+				React.createElement("h1", null, "THE Magnificent ", this.state.bgImg), 
+
+				React.createElement("div", {style: divStyle, className: "bg-wrapper"}, "Something Goes here....", 
+
 				 React.createElement("button", {onClick: this.handleBtnClick}, "EventButton One"), 
 				 React.createElement("button", {onClick: this.handleBtnClick2}, "EventButton Two"), 
 				React.createElement(ComponentOne, {visible: this.state.oneVisible, pages: this.state.pages}), 
 				React.createElement(ComponentTwo, {visible: this.state.twoVisible, pages: this.state.pages})
-
+			  )
 			)
 		);
 	},
@@ -22632,7 +22657,8 @@ module.exports = {
 	ONE_VISIBLE: "ONE_VISIBLE",
   	ONE_REMOVE: "ONE_REMOVE",
   	TWO_VISIBLE: "TWO_VISIBLE",
-  	TWO_REMOVE: "TWO_VISIBLE"
+  	TWO_REMOVE: "TWO_VISIBLE",
+	ON_LOAD: "ON_LOAD"
 }
 
 },{}],217:[function(require,module,exports){
@@ -22681,7 +22707,7 @@ var _pages = [];
 
 var _oneVisible = false, _twoVisible = false;
 
-var _image = "image1";
+var _image = "img/image1.jpg";
 
 
 // Method to load product data from mock API
@@ -22702,11 +22728,18 @@ function setTwoVisible(visible) {
   _oneVisible = false;
 }
 
+
+function getBgImg() {
+	console.log("AppStore function - getBgImg")
+  _image = "img/image2.jpg";
+}
+
+
 var AppStore = assign({}, EventEmitter.prototype, {
 
 
-	getBgImg: function (image) {
-		console.log("getBgImage - set background to: " +  _image );
+	getBgImg: function () {
+		console.log(" EventEmitter getBgImage - set background to: " +  _image );
 		return _image;
 	},
 
@@ -22758,6 +22791,10 @@ AppDispatcher.register(function(payload){
 	  	  console.log("Show page two: ", payload );
 	      _visible=true;
 	      setTwoVisible(_visible);
+	 	break;
+		 case 'ON_LOAD':
+	  	  console.log("ON_LOAD action - Loading up our image... ", payload );
+				getBgImg();
 	 	break;
 	}//end switch
 

@@ -12,7 +12,6 @@ html {
 
 /* line 9, ../sass/partials/_main.sass */
 body {
-  background: url("../img/marvel_black_panther_HiRes.jpg");
   background-size: 100% 100%;
 }
 @media (max-width: 651px) {
@@ -24,6 +23,12 @@ body {
 }
 
 /* line 19, ../sass/partials/_main.sass */
+.bg-wrapper {
+  height: 1000px;
+  background: url("../img/mobile-version.jpg");
+}
+
+/* line 23, ../sass/partials/_main.sass */
 .pageOne {
   width: 240px;
   height: 320px;
@@ -41,7 +46,7 @@ body {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-/* line 35, ../sass/partials/_main.sass */
+/* line 39, ../sass/partials/_main.sass */
 .pageTwo {
   width: 320px;
   height: 240px;

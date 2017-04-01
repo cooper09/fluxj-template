@@ -13,7 +13,7 @@ function getAppState(){
 		pages: AppStore.getPages(),
 		oneVisible: AppStore.getOneVisible(),
 		twoVisible: AppStore.getTwoVisible(),
-		getBgImg: AppStore.getBgImg()
+		bgImg: AppStore.getBgImg()
 	}
 }
 
@@ -26,6 +26,9 @@ var App = React.createClass({
 
 	componentDidMount: function(){
 		AppStore.addChangeListener(this._onChange);
+		// cooper  - set the background image
+	
+		AppActions.onLoad('Load background image');
 	},
 
 	componentUnmount: function(){
@@ -40,14 +43,28 @@ var App = React.createClass({
       AppActions.showTwo('Button Two click');
     },
 	render: function(){
+		//set the background image
+		var imgUrl = this.state.bgImg;
+		//console.log("App render -  imgUrl: " + imgUrl );
+
+		var divStyle = {
+			backgroundImage: 'url(' + imgUrl + ')',
+			backgroundSize: 'cover',
+			color: 'red'
+		}
+		
 		return(
 			<div>
 				<p>React Flux Template</p>
+				<h1>THE Magnificent {this.state.bgImg}</h1>
+
+				<div style={divStyle} className="bg-wrapper">Something Goes here....
+
 				 <button onClick={this.handleBtnClick}>EventButton One</button>
 				 <button onClick={this.handleBtnClick2}>EventButton Two</button>
 				<ComponentOne  visible={this.state.oneVisible} pages={this.state.pages }/>
 				<ComponentTwo  visible={this.state.twoVisible} pages={this.state.pages }/>
-
+			  </div>
 			</div>
 		);
 	},

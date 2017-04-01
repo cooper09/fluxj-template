@@ -11,7 +11,7 @@ var _pages = [];
 
 var _oneVisible = false, _twoVisible = false;
 
-var _image = "image1";
+var _image = "img/image1.jpg";
 
 
 // Method to load product data from mock API
@@ -32,11 +32,18 @@ function setTwoVisible(visible) {
   _oneVisible = false;
 }
 
+
+function getBgImg() {
+	console.log("AppStore function - getBgImg")
+  _image = "img/image2.jpg";
+}
+
+
 var AppStore = assign({}, EventEmitter.prototype, {
 
 
-	getBgImg: function (image) {
-		console.log("getBgImage - set background to: " +  _image );
+	getBgImg: function () {
+		console.log(" EventEmitter getBgImage - set background to: " +  _image );
 		return _image;
 	},
 
@@ -88,6 +95,10 @@ AppDispatcher.register(function(payload){
 	  	  console.log("Show page two: ", payload );
 	      _visible=true;
 	      setTwoVisible(_visible);
+	 	break;
+		 case 'ON_LOAD':
+	  	  console.log("ON_LOAD action - Loading up our image... ", payload );
+				getBgImg();
 	 	break;
 	}//end switch
 
