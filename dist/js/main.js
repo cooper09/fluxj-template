@@ -22521,7 +22521,7 @@ onLoad: function (data) {
 }//end AppActions
 module.exports = AppActions;
 
-},{"../constants/AppConstants":216,"../dispatcher/AppDispatcher":217}],213:[function(require,module,exports){
+},{"../constants/AppConstants":217,"../dispatcher/AppDispatcher":218}],213:[function(require,module,exports){
 var React = require('react');
 var AppActions = require('../actions/AppActions');
 var AppStore = require('../stores/AppStore');
@@ -22529,6 +22529,7 @@ var AppStore = require('../stores/AppStore');
 
 var ComponentOne = require('./ComponentOne.js');
 var ComponentTwo = require('./ComponentTwo.js');
+var BgHandler = require('./BgHandler.js');
 
 function getAppState(){
 	console.log("App.getAppState: ", AppStore.getOneVisible());
@@ -22550,9 +22551,13 @@ var App = React.createClass({displayName: "App",
 
 	componentDidMount: function(){
 		AppStore.addChangeListener(this._onChange);
-		// cooper  - set the background image
+		// cooper  - set the background imag
+	 
+//	 var bgImg = "img/image3.jpg";
 	
-		AppActions.onLoad('Load background image');
+	 // cooper s - here we need load a different background image with each load. 
+	 //   bgImg is my state variable for the image to use.
+	 AppActions.onLoad();
 	},
 
 	componentUnmount: function(){
@@ -22574,21 +22579,29 @@ var App = React.createClass({displayName: "App",
 		var divStyle = {
 			backgroundImage: 'url(' + imgUrl + ')',
 			backgroundSize: 'cover',
-			color: 'red'
+			color: 'red',
+			padding: '2em'
 		}
-		
+
+		var w = window,
+			d = document,
+			e = d.documentElement,
+			g = d.getElementsByTagName('body')[0],
+			x = w.innerWidth || e.clientWidth || g.clientWidth,
+			y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+				
+		//alert("Current Screen width: " + x + " height: " + y);		
+
 		return(
 			React.createElement("div", null, 
-				React.createElement("p", null, "React Flux Template"), 
-				React.createElement("h1", null, "THE Magnificent ", this.state.bgImg), 
 
-				React.createElement("div", {style: divStyle, className: "bg-wrapper"}, "Something Goes here....", 
+				React.createElement("div", {style: divStyle, className: "bg-wrapper center option animated zoomInUp"}, 
 
-				 React.createElement("button", {onClick: this.handleBtnClick}, "EventButton One"), 
-				 React.createElement("button", {onClick: this.handleBtnClick2}, "EventButton Two"), 
-				React.createElement(ComponentOne, {visible: this.state.oneVisible, pages: this.state.pages}), 
-				React.createElement(ComponentTwo, {visible: this.state.twoVisible, pages: this.state.pages})
-			  )
+				 React.createElement("button", {onClick: this.handleBtnClick, className: "mybutton"}, "Event of the Month"), 
+				 React.createElement("button", {onClick: this.handleBtnClick2, className: "mybutton"}, "Bargain of the Month"), 
+				 React.createElement(ComponentOne, {visible: this.state.oneVisible, pages: this.state.pages}), 
+				 React.createElement(ComponentTwo, {visible: this.state.twoVisible, pages: this.state.pages})
+			    )
 			)
 		);
 	},
@@ -22602,7 +22615,31 @@ var App = React.createClass({displayName: "App",
 
 module.exports = App;
 
-},{"../actions/AppActions":212,"../stores/AppStore":219,"./ComponentOne.js":214,"./ComponentTwo.js":215,"react":210}],214:[function(require,module,exports){
+},{"../actions/AppActions":212,"../stores/AppStore":220,"./BgHandler.js":214,"./ComponentOne.js":215,"./ComponentTwo.js":216,"react":210}],214:[function(require,module,exports){
+var React = require('react');
+
+var BgHandler = React.createClass({displayName: "BgHandler",
+
+	render: function() {
+		 if (!this.props.bgImage) {
+		 	console.log("We don't have a background image...");
+        } 
+
+		return (
+			React.createElement("div", null, 
+				
+				React.createElement("div", {className: ""}, "The Background Handler", 
+					React.createElement("h1", {className: ""}, this.props.bgImage)
+				
+				)
+			)
+			);
+	}//end render
+});//end BgHandler
+
+module.exports = BgHandler;
+
+},{"react":210}],215:[function(require,module,exports){
 var React = require('react');
 
 var ComponentOne = React.createClass({displayName: "ComponentOne",
@@ -22616,7 +22653,7 @@ var ComponentOne = React.createClass({displayName: "ComponentOne",
 		return (
 			React.createElement("div", null, 
 				
-				React.createElement("div", {className: "pageOne center option animated zoomInUp"}, "Hudlin's selection of the Month'", 
+				React.createElement("div", {className: "pageOne center option animated zoomInUp"}, "Hudlin's activity for the Month'", 
 					React.createElement("h1", {className: "name"}, this.props.pages.name)
 				
 				)
@@ -22627,7 +22664,7 @@ var ComponentOne = React.createClass({displayName: "ComponentOne",
 
 module.exports = ComponentOne;
 
-},{"react":210}],215:[function(require,module,exports){
+},{"react":210}],216:[function(require,module,exports){
 var React = require('react');
 
 var ComponentTwo = React.createClass({displayName: "ComponentTwo",
@@ -22640,7 +22677,7 @@ var ComponentTwo = React.createClass({displayName: "ComponentTwo",
 
 		return (
 			React.createElement("div", null, 
-				React.createElement("div", {className: "pageTwo center option animated zoomInLeft"}, "page two", 
+				React.createElement("div", {className: "pageTwo center option animated zoomInLeft"}, "Reggie's bargain of the month'", 
 					React.createElement("h3", null, this.props.pages.id)
 				)
 			)
@@ -22650,7 +22687,7 @@ var ComponentTwo = React.createClass({displayName: "ComponentTwo",
 
 module.exports = ComponentTwo;
 
-},{"react":210}],216:[function(require,module,exports){
+},{"react":210}],217:[function(require,module,exports){
 module.exports = {
 	RECEIVE_DATA: "RECEIVE_DATA",
 	MY_EVENT: "MY_EVENT", 
@@ -22661,7 +22698,7 @@ module.exports = {
 	ON_LOAD: "ON_LOAD"
 }
 
-},{}],217:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 var Dispatcher = require('flux').Dispatcher;
 var assign = require('object-assign');
 
@@ -22677,7 +22714,7 @@ var AppDispatcher = assign(new Dispatcher(),{
 
 module.exports = AppDispatcher;
 
-},{"flux":28,"object-assign":31}],218:[function(require,module,exports){
+},{"flux":28,"object-assign":31}],219:[function(require,module,exports){
 var App = require('./components/App');
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -22693,7 +22730,7 @@ ReactDOM.render(
 	document.getElementById('app')
 );
 
-},{"./PageData":211,"./components/App":213,"./utils/appAPI":221,"react":210,"react-dom":32}],219:[function(require,module,exports){
+},{"./PageData":211,"./components/App":213,"./utils/appAPI":222,"react":210,"react-dom":32}],220:[function(require,module,exports){
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;
@@ -22729,9 +22766,33 @@ function setTwoVisible(visible) {
 }
 
 
-function getBgImg() {
-	console.log("AppStore function - getBgImg")
-  _image = "img/image2.jpg";
+ function setBgImg() {
+	console.log("AppStore - setBgImg: here we calculate what our background image will be... " );
+
+  const bgList = [
+		"img/image1.jpg",
+		"img/image2.jpg",
+		"img/image3.jpg",
+		"img/image4.jpg",
+		"img/image5.jpg",
+		"img/image6.jpg",
+		"img/image7.jpg",
+		"img/image8.jpg",
+		"img/image9.jpg",
+		"img/image10.jpg",
+		"img/image11.jpg",
+		"img/image12.jpg"
+	];
+
+	console.log("AppStore.setBgImg = BgList: " + bgList );
+
+	// our random number generator  TODO: automate from input data
+	var idx = Math.floor(Math.random() * 12 + 1) - 1;
+
+  console.log("Our random number generator has generated: " + idx );
+
+	console.log('Curent image: ' + bgList[idx])
+  _image = bgList[idx];
 }
 
 
@@ -22739,9 +22800,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
 
 	getBgImg: function () {
-		console.log(" EventEmitter getBgImage - set background to: " +  _image );
+		//This is the function to return the current state of the background image. 
+		console.log("AppStore.getBgImage - current state: " +  _image );
 		return _image;
-	},
+	}, 
 
 	getPages: function () {
 	    return _pages;
@@ -22793,8 +22855,8 @@ AppDispatcher.register(function(payload){
 	      setTwoVisible(_visible);
 	 	break;
 		 case 'ON_LOAD':
-	  	  console.log("ON_LOAD action - Loading up our image... ", payload );
-				getBgImg();
+	  	  console.log("ON_LOAD action - Loading up our image... ", payload.data );
+				setBgImg(payload.data);
 	 	break;
 	}//end switch
 
@@ -22804,7 +22866,7 @@ AppDispatcher.register(function(payload){
 
 module.exports = AppStore;
 
-},{"../constants/AppConstants":216,"../dispatcher/AppDispatcher":217,"../utils/AppAPI.js":220,"events":26,"object-assign":31}],220:[function(require,module,exports){
+},{"../constants/AppConstants":217,"../dispatcher/AppDispatcher":218,"../utils/AppAPI.js":221,"events":26,"object-assign":31}],221:[function(require,module,exports){
 var AppActions = require('../actions/AppActions');
 var axios = require('axios');
 
@@ -22829,7 +22891,7 @@ module.exports = {
 
 }; //end exports
 
-},{"../actions/AppActions":212,"axios":1}],221:[function(require,module,exports){
+},{"../actions/AppActions":212,"axios":1}],222:[function(require,module,exports){
 var AppActions = require('../actions/AppActions');
 var axios = require('axios');
 
@@ -22854,4 +22916,4 @@ module.exports = {
 
 }; //end exports
 
-},{"../actions/AppActions":212,"axios":1}]},{},[218]);
+},{"../actions/AppActions":212,"axios":1}]},{},[219]);

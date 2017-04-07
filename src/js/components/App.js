@@ -5,6 +5,7 @@ var AppStore = require('../stores/AppStore');
 
 var ComponentOne = require('./ComponentOne.js');
 var ComponentTwo = require('./ComponentTwo.js');
+var BgHandler = require('./BgHandler.js');
 
 function getAppState(){
 	console.log("App.getAppState: ", AppStore.getOneVisible());
@@ -26,9 +27,13 @@ var App = React.createClass({
 
 	componentDidMount: function(){
 		AppStore.addChangeListener(this._onChange);
-		// cooper  - set the background image
+		// cooper  - set the background imag
+	 
+//	 var bgImg = "img/image3.jpg";
 	
-		AppActions.onLoad('Load background image');
+	 // cooper s - here we need load a different background image with each load. 
+	 //   bgImg is my state variable for the image to use.
+	 AppActions.onLoad();
 	},
 
 	componentUnmount: function(){
@@ -50,21 +55,29 @@ var App = React.createClass({
 		var divStyle = {
 			backgroundImage: 'url(' + imgUrl + ')',
 			backgroundSize: 'cover',
-			color: 'red'
+			color: 'red',
+			padding: '2em'
 		}
-		
+
+		var w = window,
+			d = document,
+			e = d.documentElement,
+			g = d.getElementsByTagName('body')[0],
+			x = w.innerWidth || e.clientWidth || g.clientWidth,
+			y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+				
+		//alert("Current Screen width: " + x + " height: " + y);		
+
 		return(
 			<div>
-				<p>React Flux Template</p>
-				<h1>THE Magnificent {this.state.bgImg}</h1>
 
-				<div style={divStyle} className="bg-wrapper">Something Goes here....
+				<div style={divStyle} className="bg-wrapper center option animated zoomInUp">
 
-				 <button onClick={this.handleBtnClick}>EventButton One</button>
-				 <button onClick={this.handleBtnClick2}>EventButton Two</button>
-				<ComponentOne  visible={this.state.oneVisible} pages={this.state.pages }/>
-				<ComponentTwo  visible={this.state.twoVisible} pages={this.state.pages }/>
-			  </div>
+				 <button onClick={this.handleBtnClick} className="mybutton" >Event of the Month</button>
+				 <button onClick={this.handleBtnClick2} className="mybutton" >Bargain of the Month</button>
+				 <ComponentOne  visible={this.state.oneVisible} pages={this.state.pages }/>
+				 <ComponentTwo  visible={this.state.twoVisible} pages={this.state.pages }/>
+			    </div>
 			</div>
 		);
 	},

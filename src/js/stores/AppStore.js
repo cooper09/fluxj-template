@@ -33,9 +33,33 @@ function setTwoVisible(visible) {
 }
 
 
-function getBgImg() {
-	console.log("AppStore function - getBgImg")
-  _image = "img/image2.jpg";
+ function setBgImg() {
+	console.log("AppStore - setBgImg: here we calculate what our background image will be... " );
+
+  const bgList = [
+		"img/image1.jpg",
+		"img/image2.jpg",
+		"img/image3.jpg",
+		"img/image4.jpg",
+		"img/image5.jpg",
+		"img/image6.jpg",
+		"img/image7.jpg",
+		"img/image8.jpg",
+		"img/image9.jpg",
+		"img/image10.jpg",
+		"img/image11.jpg",
+		"img/image12.jpg"
+	];
+
+	console.log("AppStore.setBgImg = BgList: " + bgList );
+
+	// our random number generator  TODO: automate from input data
+	var idx = Math.floor(Math.random() * 12 + 1) - 1;
+
+  console.log("Our random number generator has generated: " + idx );
+
+	console.log('Curent image: ' + bgList[idx])
+  _image = bgList[idx];
 }
 
 
@@ -43,9 +67,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
 
 	getBgImg: function () {
-		console.log(" EventEmitter getBgImage - set background to: " +  _image );
+		//This is the function to return the current state of the background image. 
+		console.log("AppStore.getBgImage - current state: " +  _image );
 		return _image;
-	},
+	}, 
 
 	getPages: function () {
 	    return _pages;
@@ -97,8 +122,8 @@ AppDispatcher.register(function(payload){
 	      setTwoVisible(_visible);
 	 	break;
 		 case 'ON_LOAD':
-	  	  console.log("ON_LOAD action - Loading up our image... ", payload );
-				getBgImg();
+	  	  console.log("ON_LOAD action - Loading up our image... ", payload.data );
+				setBgImg(payload.data);
 	 	break;
 	}//end switch
 

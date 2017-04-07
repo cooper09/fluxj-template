@@ -10,7 +10,7 @@ var ComponentTwo = React.createClass({
 
 		return (
 			<div>
-				<div className='pageTwo center option animated zoomInLeft'>page two
+				<div className='pageTwo center option animated zoomInLeft'>Reggie's bargain of the month'
 					<h3>{this.props.pages.id }</h3>
 				</div>
 			</div>
