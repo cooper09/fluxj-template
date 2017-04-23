@@ -11,8 +11,9 @@ var ComponentOne = React.createClass({
 		return (
 			<div>
 				
-				<div className='pageOne center option animated zoomInUp'>Hudlin's activity for the Month'
+				<div className='pageOne center option animated zoomInUp'>Image - Hudlin's activity for the Month
 					<h1 className="name">{this.props.pages.name }</h1>
+					<img src="http://placehold.it/400x20undefined1"></img>
 				
 				</div>
 			</div>

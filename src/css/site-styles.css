@@ -48,8 +48,8 @@ body {
 /* line 37, ../sass/partials/_main.sass */
 .pageOne {
   font-family: Arial, sans-serif;
-  width: 230px;
-  height: 320px;
+  width: 50%;
+  height: 21em;
   background: #333;
   padding: 1em;
   color: #ccc;
@@ -64,8 +64,16 @@ body {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   opacity: 0.9;
 }
+@media (max-width: 651px) {
+  /* line 37, ../sass/partials/_main.sass */
+  .pageOne {
+    width: 75%;
+    background: red;
+    background: url("http://placehold.it/200x20undefined1");
+  }
+}
 
-/* line 55, ../sass/partials/_main.sass */
+/* line 63, ../sass/partials/_main.sass */
 .pageTwo {
   font-family: Arial, sans-serif;
   width: 320px;

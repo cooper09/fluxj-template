@@ -22653,8 +22653,9 @@ var ComponentOne = React.createClass({displayName: "ComponentOne",
 		return (
 			React.createElement("div", null, 
 				
-				React.createElement("div", {className: "pageOne center option animated zoomInUp"}, "Hudlin's activity for the Month'", 
-					React.createElement("h1", {className: "name"}, this.props.pages.name)
+				React.createElement("div", {className: "pageOne center option animated zoomInUp"}, "Image - Hudlin's activity for the Month", 
+					React.createElement("h1", {className: "name"}, this.props.pages.name), 
+					React.createElement("img", {src: "http://placehold.it/400x20undefined1"})
 				
 				)
 			)

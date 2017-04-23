@@ -36,8 +36,9 @@ body
 
 .pageOne 
   font-family: Arial, sans-serif
-  width: 230px
-  height: 320px
+  width: 50%
+  //+span-columns(6)
+  height: 21em
   background: #333
   padding: 1em
   color: #ccc
@@ -51,7 +52,14 @@ body
   transition: 1s right ease
   box-shadow: 0 0 5px rgba(0, 0, 0, .5)
   opacity: 0.9
-  
+  +at-breakpoint($phone)
+    //+span-columns(12)
+    width: 75%
+    background: red
+    background: url('http://placehold.it/200x20undefined1')
+    img
+      //display: none
+
 .pageTwo
   font-family: Arial, sans-serif
   width: 320px
