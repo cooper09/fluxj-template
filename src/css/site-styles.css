@@ -67,17 +67,17 @@ body {
 @media (max-width: 651px) {
   /* line 37, ../sass/partials/_main.sass */
   .pageOne {
-    width: 75%;
-    background: red;
-    background: url("http://placehold.it/200x20undefined1");
+    width: 100%;
+    float: left;
+    margin-right: 1.69492%;
   }
 }
 
-/* line 63, ../sass/partials/_main.sass */
+/* line 61, ../sass/partials/_main.sass */
 .pageTwo {
   font-family: Arial, sans-serif;
-  width: 320px;
-  height: 240px;
+  width: 50%;
+  height: 33em;
   background: #333;
   padding: 1em;
   color: #ccc;
@@ -91,4 +91,44 @@ body {
   transition: 1s left ease;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   opacity: 0.9;
+}
+@media (max-width: 651px) {
+  /* line 61, ../sass/partials/_main.sass */
+  .pageTwo {
+    width: 100%;
+    float: left;
+    margin-right: 1.69492%;
+  }
+  /* line 80, ../sass/partials/_main.sass */
+  .pageTwo img {
+    width: 100%;
+    float: left;
+    margin-right: 1.69492%;
+  }
+}
+
+/* line 83, ../sass/partials/_main.sass */
+.showPointer {
+  cursor: pointer;
+}
+
+/* line 86, ../sass/partials/_main.sass */
+.blogImage {
+  width: 320px;
+  height: 200px;
+}
+@media (max-width: 651px) {
+  /* line 86, ../sass/partials/_main.sass */
+  .blogImage {
+    width: 200px;
+    margin-top: 1em;
+  }
+}
+
+/* line 93, ../sass/partials/_main.sass */
+.closeBtn {
+  background: #000;
+  float: right;
+  padding: 0.5em;
+  cursor: pointer;
 }

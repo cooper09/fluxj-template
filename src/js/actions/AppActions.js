@@ -24,7 +24,13 @@ loadPages: function (data) {
       data: data
     	})
 	},
-
+closeMe: function (data) {
+	console.log("AppActions.closeMe: ", data );
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.CLOSE_WINDOW,
+      data: data
+    	})
+	},
 onLoad: function (data) {
 	console.log("AppActions.onLoad: ", data );
     AppDispatcher.handleViewAction({

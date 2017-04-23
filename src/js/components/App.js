@@ -47,6 +47,10 @@ var App = React.createClass({
       console.log('APP - Handle my button click: ');
       AppActions.showTwo('Button Two click');
     },
+	closeBtnClick: function() {
+		console.log('Time for parent to close the window...');
+		AppActions.closeMe('Close Window');
+	},
 	render: function(){
 		//set the background image
 		var imgUrl = this.state.bgImg;
@@ -75,8 +79,8 @@ var App = React.createClass({
 
 				 <button onClick={this.handleBtnClick} className="mybutton" >Event of the Month</button>
 				 <button onClick={this.handleBtnClick2} className="mybutton" >Bargain of the Month</button>
-				 <ComponentOne  visible={this.state.oneVisible} pages={this.state.pages }/>
-				 <ComponentTwo  visible={this.state.twoVisible} pages={this.state.pages }/>
+				 <ComponentOne  visible={this.state.oneVisible} pages={this.state.pages } onClick={this.closeBtnClick}/>
+				 <ComponentTwo  visible={this.state.twoVisible} pages={this.state.pages } onClick={this.closeBtnClick}/>
 			    </div>
 			</div>
 		);

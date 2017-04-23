@@ -32,6 +32,11 @@ function setTwoVisible(visible) {
   _oneVisible = false;
 }
 
+function closeWindow() {
+	console.log("AppStore.closeWindow - close whatever window open: " );
+	_oneVisible = false;
+  _twoVisible = false;
+}
 
  function setBgImg() {
 	console.log("AppStore - setBgImg: here we calculate what our background image will be... " );
@@ -46,7 +51,7 @@ function setTwoVisible(visible) {
 		"img/image7.jpg",
 		"img/image8.jpg",
 		"img/image9.jpg",
-		"img/image10.jpg",
+		"img/image10.png",
 		"img/image11.jpg",
 		"img/image12.jpg"
 	];
@@ -120,6 +125,10 @@ AppDispatcher.register(function(payload){
 	  	  console.log("Show page two: ", payload );
 	      _visible=true;
 	      setTwoVisible(_visible);
+	 	break;
+		case 'CLOSE_WINDOW':
+	  	  console.log("CLOSE_WINDOW action - Close Our Window... ", payload.data );
+				closeWindow();
 	 	break;
 		 case 'ON_LOAD':
 	  	  console.log("ON_LOAD action - Loading up our image... ", payload.data );

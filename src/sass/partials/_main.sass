@@ -53,17 +53,15 @@ body
   box-shadow: 0 0 5px rgba(0, 0, 0, .5)
   opacity: 0.9
   +at-breakpoint($phone)
-    //+span-columns(12)
-    width: 75%
-    background: red
-    background: url('http://placehold.it/200x20undefined1')
+    +span-columns(12)
+    //background: url('http://placehold.it/200x20undefined1')
     img
       //display: none
 
 .pageTwo
   font-family: Arial, sans-serif
-  width: 320px
-  height: 240px
+  width: 50%
+  height: 33em
   background: #333
   padding: 1em
   color: #ccc
@@ -77,3 +75,23 @@ body
   transition: 1s left ease
   box-shadow: 0 0 5px rgba(0, 0, 0, .5)
   opacity: 0.9
+  +at-breakpoint($phone)
+    +span-columns(12)
+    img
+      +span-columns(12)
+      
+.showPointer
+  cursor: pointer
+
+.blogImage
+  width: 320px
+  height: 200px
+  +at-breakpoint($phone)
+    width: 200px
+    margin-top: 1em
+
+.closeBtn
+  background: #000
+  float: right
+  padding: 0.5em
+  cursor: pointer
