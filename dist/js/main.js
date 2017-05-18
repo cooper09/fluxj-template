@@ -22509,7 +22509,13 @@ loadPages: function (data) {
       data: data
     	})
 	},
-
+closeMe: function (data) {
+	console.log("AppActions.closeMe: ", data );
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.CLOSE_WINDOW,
+      data: data
+    	})
+	},
 onLoad: function (data) {
 	console.log("AppActions.onLoad: ", data );
     AppDispatcher.handleViewAction({
@@ -22571,6 +22577,10 @@ var App = React.createClass({displayName: "App",
       console.log('APP - Handle my button click: ');
       AppActions.showTwo('Button Two click');
     },
+	closeBtnClick: function() {
+		console.log('Time for parent to close the window...');
+		AppActions.closeMe('Close Window');
+	},
 	render: function(){
 		//set the background image
 		var imgUrl = this.state.bgImg;
@@ -22599,8 +22609,8 @@ var App = React.createClass({displayName: "App",
 
 				 React.createElement("button", {onClick: this.handleBtnClick, className: "mybutton"}, "Event of the Month"), 
 				 React.createElement("button", {onClick: this.handleBtnClick2, className: "mybutton"}, "Bargain of the Month"), 
-				 React.createElement(ComponentOne, {visible: this.state.oneVisible, pages: this.state.pages}), 
-				 React.createElement(ComponentTwo, {visible: this.state.twoVisible, pages: this.state.pages})
+				 React.createElement(ComponentOne, {visible: this.state.oneVisible, pages: this.state.pages, onClick: this.closeBtnClick}), 
+				 React.createElement(ComponentTwo, {visible: this.state.twoVisible, pages: this.state.pages, onClick: this.closeBtnClick})
 			    )
 			)
 		);
@@ -22643,7 +22653,15 @@ module.exports = BgHandler;
 var React = require('react');
 
 var ComponentOne = React.createClass({displayName: "ComponentOne",
-
+	
+	closeMe: function () {
+		console.log("Close one up!");
+		this.props.onClick();
+	},
+	blogPage: function () {
+		console.log("lets head to the blog...");
+		window.open('http://hudlinentertainment.com/');
+	},
 	render: function() {
 		 if (!this.props.visible) {
 		 	console.log("componentOne is off");
@@ -22652,10 +22670,12 @@ var ComponentOne = React.createClass({displayName: "ComponentOne",
 
 		return (
 			React.createElement("div", null, 
-				
-				React.createElement("div", {className: "pageOne center option animated zoomInUp"}, "Image - Hudlin's activity for the Month", 
-					React.createElement("h1", {className: "name"}, this.props.pages.name), 
-					React.createElement("img", {src: "http://placehold.it/400x20undefined1"})
+				React.createElement("div", {className: "pageOne center option animated zoomInUp"}, 
+					React.createElement("div", {className: "closeBtn", onClick: this.closeMe}, "X"), 
+					"Reggie's Latest", 
+					React.createElement("p", null), 
+					React.createElement("center", null, React.createElement("img", {src: "img/don-rickles-320x240.jpg", className: "blogImage showPointer", onClick: 
+this.blogPage}))
 				
 				)
 			)
@@ -22670,6 +22690,17 @@ var React = require('react');
 
 var ComponentTwo = React.createClass({displayName: "ComponentTwo",
 
+	closeMe: function() {
+		console.log("Close me up!");
+		this.props.onClick();
+	},
+ 	salesPage: function() {
+		console.log("Show our sale page...");
+		//AppActions.myEvent('Sale Button click');
+		window.open('http://www.reggiesworld.com/pages/shop/hardware-man-in-the-machine-124.php');
+	},
+ 
+ 
 	render: function() {
 		 if (!this.props.visible) {
 		 	console.log("componentTwo is off");
@@ -22678,8 +22709,11 @@ var ComponentTwo = React.createClass({displayName: "ComponentTwo",
 
 		return (
 			React.createElement("div", null, 
-				React.createElement("div", {className: "pageTwo center option animated zoomInLeft"}, "Reggie's bargain of the month'", 
-					React.createElement("h3", null, this.props.pages.id)
+				React.createElement("div", {className: "pageTwo center option animated zoomInLeft"}, 
+				React.createElement("div", {className: "closeBtn", onClick: this.closeMe}, "X"), 
+					"Reggie's bargain of the month", 
+					React.createElement("center", null, React.createElement("h3", {onClick: this.salesPage, className: "showPointer"}, "Buy Now")), 
+					React.createElement("center", null, React.createElement("img", {src: "img/HardwareManMachine.jpg", onClick: this.salesPage, className: "showPointer"}))
 				)
 			)
 			);
@@ -22696,7 +22730,8 @@ module.exports = {
   	ONE_REMOVE: "ONE_REMOVE",
   	TWO_VISIBLE: "TWO_VISIBLE",
   	TWO_REMOVE: "TWO_VISIBLE",
-	ON_LOAD: "ON_LOAD"
+	ON_LOAD: "ON_LOAD",
+	CLOSE_WINDOW: "CLOSE_WINDOW"
 }
 
 },{}],218:[function(require,module,exports){
@@ -22766,6 +22801,11 @@ function setTwoVisible(visible) {
   _oneVisible = false;
 }
 
+function closeWindow() {
+	console.log("AppStore.closeWindow - close whatever window open: " );
+	_oneVisible = false;
+  _twoVisible = false;
+}
 
  function setBgImg() {
 	console.log("AppStore - setBgImg: here we calculate what our background image will be... " );
@@ -22780,7 +22820,7 @@ function setTwoVisible(visible) {
 		"img/image7.jpg",
 		"img/image8.jpg",
 		"img/image9.jpg",
-		"img/image10.jpg",
+		"img/image10.png",
 		"img/image11.jpg",
 		"img/image12.jpg"
 	];
@@ -22854,6 +22894,10 @@ AppDispatcher.register(function(payload){
 	  	  console.log("Show page two: ", payload );
 	      _visible=true;
 	      setTwoVisible(_visible);
+	 	break;
+		case 'CLOSE_WINDOW':
+	  	  console.log("CLOSE_WINDOW action - Close Our Window... ", payload.data );
+				closeWindow();
 	 	break;
 		 case 'ON_LOAD':
 	  	  console.log("ON_LOAD action - Loading up our image... ", payload.data );
