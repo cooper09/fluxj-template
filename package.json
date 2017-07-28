@@ -11,10 +11,10 @@
   "devDependencies": {
     "browserify": "*",
     "flux": "*",
-    "gulp": "*",
+    "gulp": "^3.9.1",
+    "object-assign": "*",
     "reactify": "*",
-    "vinyl-source-stream": "*",
-    "object-assign": "*"
+    "vinyl-source-stream": "*"
   },
   "dependencies": {
     "axios": "^0.15.3",
