@@ -14,7 +14,7 @@ body
   //background-size: cover
   +at-breakpoint($phone)
     background: black
-    //background: url('../img/mobile-version.jpg')
+    background: url('../img/mobile-version.jpg')
     z-index: 99999
 
 
@@ -31,64 +31,8 @@ body
 .mybutton
   background: #444
   color: #ccc
-  padding: 1em
+  padding: 1em 2em 1em 2em
   cursor: pointer
-
-.pageOne 
-  font-family: Arial, sans-serif
-  width: 50%
-  //+span-columns(6)
-  height: 21em
-  background: #333
-  padding: 1em
-  color: #ccc
-  margin-top: 1em
-  margin-left: auto
-  margin-right: auto
-  -webkit-transition: 1s right ease
-  -moz-transition: 1s right ease
-  -ms-transition: 1s right ease
-  -o-transition: 1s right ease
-  transition: 1s right ease
-  box-shadow: 0 0 5px rgba(0, 0, 0, .5)
-  opacity: 0.9
-  +at-breakpoint($phone)
-    +span-columns(12)
-    //background: url('http://placehold.it/200x20undefined1')
-    img
-      //display: none
-
-.pageTwo
-  font-family: Arial, sans-serif
-  width: 50%
-  height: 33em
-  background: #333
-  padding: 1em
-  color: #ccc
-  margin-top: 1em
-  margin-left: auto
-  margin-right: auto
-  -webkit-transition: 1s left ease
-  -moz-transition: 1s left ease
-  -ms-transition: 1s left ease
-  -o-transition: 1s left ease
-  transition: 1s left ease
-  box-shadow: 0 0 5px rgba(0, 0, 0, .5)
-  opacity: 0.9
-  +at-breakpoint($phone)
-    +span-columns(12)
-    img
-      +span-columns(12)
-      
-.showPointer
-  cursor: pointer
-
-.blogImage
-  width: 320px
-  height: 200px
-  +at-breakpoint($phone)
-    width: 200px
-    margin-top: 1em
 
 .closeBtn
   background: #000

@@ -39,27 +39,19 @@ function closeWindow() {
 }
 
  function setBgImg() {
-	console.log("AppStore - setBgImg: here we calculate what our background image will be... " );
+	console.log("AppStore - setBgImg: here's we calculate what our background image will be... " );
 
   const bgList = [
 		"img/image1.jpg",
-		"img/image2.jpg",
-		"img/image3.jpg",
-		"img/image4.jpg",
-		"img/image5.jpg",
-		"img/image6.jpg",
-		"img/image7.jpg",
-		"img/image8.jpg",
-		"img/image9.jpg",
-		"img/image10.png",
-		"img/image11.jpg",
-		"img/image12.jpg"
+		"img/image2.jpg"
 	];
 
 	console.log("AppStore.setBgImg = BgList: " + bgList );
 
-	// our random number generator  TODO: automate from input data
-	var idx = Math.floor(Math.random() * 12 + 1) - 1;
+	// our random number generator  TODO: automate from input data, ie, count the number of
+	//  in the background list array and use that to seed our random number generator
+
+	var idx = Math.floor(Math.random() * 2 + 1) - 1;
 
   console.log("Our random number generator has generated: " + idx );
 
@@ -86,6 +78,8 @@ var AppStore = assign({}, EventEmitter.prototype, {
 	  // Return cart visibility state
 	getOneVisible: function () {
 		console.log('AppStore.getOneVisible: ' + _oneVisible );
+		// for our simple form we will keep Component One (the form) be visible from the beginning
+		_oneVisible = true;
 		return _oneVisible;
 	},
 	getTwoVisible: function () {

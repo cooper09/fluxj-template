@@ -76,11 +76,7 @@ var App = React.createClass({
 			<div>
 
 				<div style={divStyle} className="bg-wrapper center option animated zoomInUp">
-
-				 <button onClick={this.handleBtnClick} className="mybutton" >Event of the Month</button>
-				 <button onClick={this.handleBtnClick2} className="mybutton" >Bargain of the Month</button>
 				 <ComponentOne  visible={this.state.oneVisible} pages={this.state.pages } onClick={this.closeBtnClick}/>
-				 <ComponentTwo  visible={this.state.twoVisible} pages={this.state.pages } onClick={this.closeBtnClick}/>
 			    </div>
 			</div>
 		);

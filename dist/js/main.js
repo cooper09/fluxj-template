@@ -22606,11 +22606,7 @@ var App = React.createClass({displayName: "App",
 			React.createElement("div", null, 
 
 				React.createElement("div", {style: divStyle, className: "bg-wrapper center option animated zoomInUp"}, 
-
-				 React.createElement("button", {onClick: this.handleBtnClick, className: "mybutton"}, "Event of the Month"), 
-				 React.createElement("button", {onClick: this.handleBtnClick2, className: "mybutton"}, "Bargain of the Month"), 
-				 React.createElement(ComponentOne, {visible: this.state.oneVisible, pages: this.state.pages, onClick: this.closeBtnClick}), 
-				 React.createElement(ComponentTwo, {visible: this.state.twoVisible, pages: this.state.pages, onClick: this.closeBtnClick})
+				 React.createElement(ComponentOne, {visible: this.state.oneVisible, pages: this.state.pages, onClick: this.closeBtnClick})
 			    )
 			)
 		);
@@ -22654,6 +22650,56 @@ var React = require('react');
 
 var ComponentOne = React.createClass({displayName: "ComponentOne",
 	
+		onSubmit: function (e){
+		e.preventDefault();
+		console.log("test: ", document.getElementById("name").value);
+		//console.log("Submit me, baby: ", e );
+		var name = document.getElementById("name").value;
+	    var email = document.getElementById("email").value;
+		var phone = document.getElementById("phone").value;
+
+		var validEmail = validateEmail(email);
+	    console.log("validate email: "+ validEmail );
+
+		var validPhone = validatePhone(phone);
+	    console.log("validate phone: "+ validPhone );
+
+		if ((validEmail === true) && (validPhone === true)) {
+			alert("Data has been successfully submitted...");
+		} else {
+			alert("You must enter valid email and phone number to continue.")
+		}
+
+//Validation code for Email and phone number
+		function validateEmail (email) {
+			console.log("Validate email: ", email );
+
+			var x = email;
+			var atpos = x.indexOf("@");
+			var dotpos = x.lastIndexOf(".");
+			if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+				alert("You must enter a valid e-mail address!");
+				return false;
+			} else {
+				return true;
+			}
+		}//validate email 
+	//Phone Number validation
+		function validatePhone (phone) {
+			console.log("Validate phone number: ", phone );
+			var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;  
+			console.log("phoneno: ", phone.match(phoneno));	
+			var ok = phone.match(phoneno);
+			console.log("validatePhone - Are we OK: ", ok )
+			if ((ok))  { 
+				return true;  
+			}  else  {  
+				alert("You must enter a valid phone number!");  
+				return false;   
+			}   
+
+		}//validate phone
+	},//end onSubmit
 	closeMe: function () {
 		console.log("Close one up!");
 		this.props.onClick();
@@ -22672,11 +22718,18 @@ var ComponentOne = React.createClass({displayName: "ComponentOne",
 			React.createElement("div", null, 
 				React.createElement("div", {className: "pageOne center option animated zoomInUp"}, 
 					React.createElement("div", {className: "closeBtn", onClick: this.closeMe}, "X"), 
-					"Reggie's Latest", 
+					"Marshall The Movie", 
 					React.createElement("p", null), 
-					React.createElement("center", null, React.createElement("img", {src: "img/don-rickles-320x240.jpg", className: "blogImage showPointer", onClick: 
-this.blogPage}))
-				
+					React.createElement("center", null, React.createElement("form", {onSubmit: this.onSubmit}, 
+						React.createElement("h1", null, "Enter Your Info Here"), 
+
+						React.createElement("span", {className: "label"}, "Name: "), React.createElement("input", {type: "text", id: "name", name: "fname", className: "formfld", width: "120", required: true}), React.createElement("br", null), 
+						React.createElement("span", {className: "label"}, "Email: "), React.createElement("input", {type: "text", id: "email", name: "email", className: "formfld", width: "120", required: true}), React.createElement("br", null), 
+						React.createElement("span", {className: "label"}, "Contact Number: "), React.createElement("input", {type: "text", id: "phone", className: "formfld", width: "30"}), React.createElement("br", null), 
+						React.createElement("br", null), React.createElement("br", null), 
+						React.createElement("button", {type: "submit", className: "mybutton"}, "Submit")
+				))
+					
 				)
 			)
 			);
@@ -22808,27 +22861,19 @@ function closeWindow() {
 }
 
  function setBgImg() {
-	console.log("AppStore - setBgImg: here we calculate what our background image will be... " );
+	console.log("AppStore - setBgImg: here's we calculate what our background image will be... " );
 
   const bgList = [
 		"img/image1.jpg",
-		"img/image2.jpg",
-		"img/image3.jpg",
-		"img/image4.jpg",
-		"img/image5.jpg",
-		"img/image6.jpg",
-		"img/image7.jpg",
-		"img/image8.jpg",
-		"img/image9.jpg",
-		"img/image10.png",
-		"img/image11.jpg",
-		"img/image12.jpg"
+		"img/image2.jpg"
 	];
 
 	console.log("AppStore.setBgImg = BgList: " + bgList );
 
-	// our random number generator  TODO: automate from input data
-	var idx = Math.floor(Math.random() * 12 + 1) - 1;
+	// our random number generator  TODO: automate from input data, ie, count the number of
+	//  in the background list array and use that to seed our random number generator
+
+	var idx = Math.floor(Math.random() * 2 + 1) - 1;
 
   console.log("Our random number generator has generated: " + idx );
 
@@ -22855,6 +22900,8 @@ var AppStore = assign({}, EventEmitter.prototype, {
 	  // Return cart visibility state
 	getOneVisible: function () {
 		console.log('AppStore.getOneVisible: ' + _oneVisible );
+		// for our simple form we will keep Component One (the form) be visible from the beginning
+		_oneVisible = true;
 		return _oneVisible;
 	},
 	getTwoVisible: function () {
