@@ -10,10 +10,10 @@ myEvent: function (data) {
     	})
 	},
 
-showTwo: function (data) {
+showTags: function (data) {
 	console.log("AppActions.showTwo: ", data );
     AppDispatcher.handleViewAction({
-      actionType: AppConstants.TWO_VISIBLE,
+      actionType: AppConstants.SHOW_TAGS,
       data: data
     	})
 	},
@@ -23,7 +23,21 @@ loadPages: function (data) {
       actionType: AppConstants.RECEIVE_DATA,
       data: data
     	})
-	}
+	},
+  showTop25: function (data) {
+    console.log("AppActions.loadPages: ", data );
+      AppDispatcher.handleViewAction({
+        actionType: AppConstants.SHOW_TOP25,
+        data: data
+        })
+    },
+    removeTop25: function (data) {
+      console.log("AppActions.loadPages: ", data );
+        AppDispatcher.handleViewAction({
+          actionType: AppConstants.REMOVE_TOP25,
+          data: data
+          })
+      }
 
 }//end AppActions
 module.exports = AppActions;

@@ -1,23 +1,23 @@
 var React = require('react');
 
-var ComponentOne = React.createClass({
+var Articles = React.createClass({
 
 	render: function() {
 		 if (!this.props.visible) {
-		 	console.log("componentOne is off");
+		 	console.log("Articles is off");
           return false;
         }
 
 		return (
 			<div>
 				
-				<div className='pageOne center option animated zoomInUp'>page one
+				<div className='mainScrn center option animated fadeIn'>Select Articles
 					<h1 className="name">{this.props.pages.name }</h1>
 					<img src={this.props.pages.avatar } />
 				</div>
 			</div>
 			);
 	}//end render
-});//end ComponentOne
+});//end Articles
 
-module.exports = ComponentOne;
+module.exports = Articles;

@@ -12,48 +12,104 @@ html {
 
 /* line 9, ../sass/partials/_main.sass */
 body {
-  background: url("https://66.media.tumblr.com/d51a2a2502f70238adbb0c242c4e89dd/tumblr_ocqdob8xcZ1s8iqo7o1_1280.gif") no-repeat;
   background-size: 100% 100%;
+  font-family: Arial;
 }
 @media (max-width: 651px) {
   /* line 9, ../sass/partials/_main.sass */
   body {
-    background: black;
+    background: #666;
   }
 }
 
 /* line 17, ../sass/partials/_main.sass */
-.pageOne {
-  width: 240px;
-  height: 320px;
-  background: #333;
-  padding: 1em;
-  color: yellow;
-  margin-top: 1em;
-  margin-left: auto;
-  margin-right: auto;
-  -webkit-transition: 1s right ease;
-  -moz-transition: 1s right ease;
-  -ms-transition: 1s right ease;
-  -o-transition: 1s right ease;
-  transition: 1s right ease;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+p {
+  color: #333;
 }
 
-/* line 33, ../sass/partials/_main.sass */
-.pageTwo {
-  width: 320px;
-  height: 240px;
-  background: red;
+/* line 20, ../sass/partials/_main.sass */
+.mainScrn {
+  width: 66.10169%;
+  float: left;
+  margin-right: 1.69492%;
+  display: inline;
+  background: #333;
   padding: 1em;
-  color: yellow;
+  color: #ccc;
   margin-top: 1em;
   margin-left: auto;
   margin-right: auto;
-  -webkit-transition: 1s left ease;
-  -moz-transition: 1s left ease;
-  -ms-transition: 1s left ease;
-  -o-transition: 1s left ease;
-  transition: 1s left ease;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+@media (max-width: 651px) {
+  /* line 20, ../sass/partials/_main.sass */
+  .mainScrn {
+    width: 100%;
+    float: left;
+    margin-right: 1.69492%;
+  }
+}
+
+/* line 32, ../sass/partials/_main.sass */
+.btn {
+  background: #c72a35;
+  padding: 0.5em;
+  font-size: 1em;
+  color: #ccc;
+  cursor: pointer;
+  width: 100%;
+  float: left;
+  margin-right: 1.69492%;
+  display: inline;
+}
+
+/* line 40, ../sass/partials/_main.sass */
+.btn-hilite {
+  background: #333;
+  padding: 0.5em;
+  font-size: 1em;
+  color: #ccc;
+  cursor: pointer;
+  width: 100%;
+  float: left;
+  margin-right: 1.69492%;
+  display: inline;
+}
+
+/* line 48, ../sass/partials/_main.sass */
+.btn-right {
+  float: right;
+}
+
+/* line 51, ../sass/partials/_main.sass */
+.btn25 {
+  width: 32.20339%;
+  float: left;
+  margin-right: 1.69492%;
+  display: inline;
+  float: right;
+  margin: 1em;
+  background: #c72a35;
+  padding: 0.5em;
+  font-size: 1em;
+  color: #ccc;
+  cursor: pointer;
+}
+
+/* line 61, ../sass/partials/_main.sass */
+.sidePanel {
+  width: 32.20339%;
+  float: left;
+  margin-right: 1.69492%;
+  display: inline;
+  background: gray;
+  padding: 1em;
+}
+@media (max-width: 651px) {
+  /* line 61, ../sass/partials/_main.sass */
+  .sidePanel {
+    width: 100%;
+    float: left;
+    margin-right: 1.69492%;
+  }
 }

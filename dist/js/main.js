@@ -21219,10 +21219,10 @@ myEvent: function (data) {
     	})
 	},
 
-showTwo: function (data) {
+showTags: function (data) {
 	console.log("AppActions.showTwo: ", data );
     AppDispatcher.handleViewAction({
-      actionType: AppConstants.TWO_VISIBLE,
+      actionType: AppConstants.SHOW_TAGS,
       data: data
     	})
 	},
@@ -21232,27 +21232,43 @@ loadPages: function (data) {
       actionType: AppConstants.RECEIVE_DATA,
       data: data
     	})
-	}
+	},
+  showTop25: function (data) {
+    console.log("AppActions.loadPages: ", data );
+      AppDispatcher.handleViewAction({
+        actionType: AppConstants.SHOW_TOP25,
+        data: data
+        })
+    },
+    removeTop25: function (data) {
+      console.log("AppActions.loadPages: ", data );
+        AppDispatcher.handleViewAction({
+          actionType: AppConstants.REMOVE_TOP25,
+          data: data
+          })
+      }
 
 }//end AppActions
 module.exports = AppActions;
 
-},{"../constants/AppConstants":194,"../dispatcher/AppDispatcher":195}],191:[function(require,module,exports){
+},{"../constants/AppConstants":195,"../dispatcher/AppDispatcher":196}],191:[function(require,module,exports){
 var React = require('react');
 var AppActions = require('../actions/AppActions');
 var AppStore = require('../stores/AppStore');
 //cooper s - add subcomponents here
 
-var ComponentOne = require('./ComponentOne.js');
-var ComponentTwo = require('./ComponentTwo.js');
+var Articles = require('./Articles.js');
+var Tags = require('./Tags.js');
+var Top25 = require('./Top25.js')
 
 function getAppState(){
-	console.log("App.getAppState: ", AppStore.getOneVisible());
+//	console.log("App.getAppState: ", AppStore.getOneVisible());
 	return {
 		//app: AppStore.getState(),
 		pages: AppStore.getPages(),
-		oneVisible: AppStore.getOneVisible(),
-		twoVisible: AppStore.getTwoVisible()
+		articlesVisible: AppStore.getArticlesVisible(),
+		tagsVisible: AppStore.getTagsVisible(),
+		top25Visible: AppStore.getTop25Visible()
 	}
 }
 
@@ -21271,22 +21287,59 @@ var App = React.createClass({displayName: "App",
 		AppStore.removeChangeListener(this._onChange);
 	},
 	handleBtnClick: function() {
-      console.log('APP - Handle my button click: ');
-      AppActions.myEvent('Button One click');
+	  console.log('APP - Handle Articles button click: ');
+	  $('#btn1').removeClass("btn-hilite");
+	  $('#btn1').addClass("btn");
+
+	  $('#btn2').removeClass("btn");
+	  $('#btn2').addClass("btn-hilite");
+
+	  $('#btn3').removeClass("btn-hilite");
+	  $('#btn3').addClass("btn"); 
+
+
+      AppActions.myEvent('Articles click');
     },
     handleBtnClick2: function() {
-      console.log('APP - Handle my button click: ');
-      AppActions.showTwo('Button Two click');
-    },
+	  console.log('APP - Handle my button click: ');
+
+	  $('#btn3').removeClass("btn");
+	  $('#btn3').addClass("btn-hilite");
+
+	  $('#btn2').removeClass("btn-hilite");
+	  $('#btn2').addClass("btn");
+
+	  $('#btn1').removeClass("btn-hilite");
+	  $('#btn1').addClass("btn"); 
+
+      AppActions.showTags('Button Tags click');
+	},
+	handleTop25Click: function(){
+		console.log("show Top25 Panel");
+
+		$('#btn1').removeClass("btn");
+		$('#btn1').addClass("btn-hilite");
+  
+		$('#btn2').removeClass("btn-hilite");
+		$('#btn2').addClass("btn");
+  
+		$('#btn3').removeClass("btn-hilite");
+		$('#btn3').addClass("btn"); 
+
+		AppActions.showTop25('Top25 click');
+	},
 	render: function(){
 		return(
 			React.createElement("div", null, 
-				React.createElement("p", null, "React Flux Template"), 
-				 React.createElement("button", {onClick: this.handleBtnClick}, "EventButton One"), 
-				 React.createElement("button", {onClick: this.handleBtnClick2}, "EventButton Two"), 
-				React.createElement(ComponentOne, {visible: this.state.oneVisible, pages: this.state.pages}), 
-				React.createElement(ComponentTwo, {visible: this.state.twoVisible, pages: this.state.pages})
-
+				React.createElement("p", null, "mPoint AutoContant Manager"), 
+				React.createElement("div", {className: "sidePanel"}, 
+					React.createElement("button", {onClick: this.handleTop25Click, className: "btn-hilite", id: "btn1"}, "Top 25 Articles"), 
+					React.createElement("button", {onClick: this.handleBtnClick, className: "btn", id: "btn2"}, "Create Articles"), 
+					React.createElement("button", {onClick: this.handleBtnClick2, className: "btn", id: "btn3"}, "Add Tags")
+				 ), 
+					React.createElement(Articles, {visible: this.state.articlesVisible, pages: this.state.pages}), 
+					React.createElement(Tags, {visible: this.state.tagsVisible, pages: this.state.pages}), 
+					React.createElement(Top25, {visible: this.state.top25Visible, pages: this.state.pages})
 			)
 		);
 	},
@@ -21300,65 +21353,96 @@ var App = React.createClass({displayName: "App",
 
 module.exports = App;
 
-},{"../actions/AppActions":190,"../stores/AppStore":197,"./ComponentOne.js":192,"./ComponentTwo.js":193,"react":188}],192:[function(require,module,exports){
+},{"../actions/AppActions":190,"../stores/AppStore":198,"./Articles.js":192,"./Tags.js":193,"./Top25.js":194,"react":188}],192:[function(require,module,exports){
 var React = require('react');
 
-var ComponentOne = React.createClass({displayName: "ComponentOne",
+var Articles = React.createClass({displayName: "Articles",
 
 	render: function() {
 		 if (!this.props.visible) {
-		 	console.log("componentOne is off");
+		 	console.log("Articles is off");
           return false;
         }
 
 		return (
 			React.createElement("div", null, 
 				
-				React.createElement("div", {className: "pageOne center option animated zoomInUp"}, "page one", 
+				React.createElement("div", {className: "mainScrn center option animated fadeIn"}, "Select Articles", 
 					React.createElement("h1", {className: "name"}, this.props.pages.name), 
 					React.createElement("img", {src: this.props.pages.avatar})
 				)
 			)
 			);
 	}//end render
-});//end ComponentOne
+});//end Articles
 
-module.exports = ComponentOne;
+module.exports = Articles;
 
 },{"react":188}],193:[function(require,module,exports){
 var React = require('react');
 
-var ComponentTwo = React.createClass({displayName: "ComponentTwo",
+var Tags = React.createClass({displayName: "Tags",
 
 	render: function() {
 		 if (!this.props.visible) {
-		 	console.log("componentTwo is off");
+		 	console.log("Tags is off");
           return false;
         }
 
 		return (
 			React.createElement("div", null, 
-				React.createElement("div", {className: "pageTwo center option animated zoomInLeft"}, "page two", 
+				React.createElement("div", {className: "mainScrn center option animated fadeIn"}, "Add Tags", 
 					React.createElement("h3", null, this.props.pages.id)
 				)
 			)
 			);
 	}//end render
-});//end ComponentOne
+});//end Tags
 
-module.exports = ComponentTwo;
+module.exports = Tags;
 
 },{"react":188}],194:[function(require,module,exports){
+var React = require('react');
+
+var Top25 = React.createClass({displayName: "Top25",
+
+	render: function() {
+		 if (!this.props.visible) {
+		 	console.log("Top25 is off");
+          return false;
+        }
+
+		return (
+			React.createElement("div", null, 
+				React.createElement("div", {className: "mainScrn center option animated fadeIn"}, "Top 25", 
+					React.createElement("h3", null, this.props.pages.id)
+				)
+			)
+			);
+	}//end render
+});//end Tags
+
+module.exports = Top25;
+
+},{"react":188}],195:[function(require,module,exports){
 module.exports = {
 	RECEIVE_DATA: "RECEIVE_DATA",
 	MY_EVENT: "MY_EVENT", 
 	ONE_VISIBLE: "ONE_VISIBLE",
   	ONE_REMOVE: "ONE_REMOVE",
   	TWO_VISIBLE: "TWO_VISIBLE",
-  	TWO_REMOVE: "TWO_VISIBLE"
+	TWO_REMOVE: "TWO_VISIBLE",
+	SHOW_LOGIN: "SHOW_LOGIN",
+	SHOW_ARTICLES: "SHOW_ARTICLES",
+	SHOW_TAGS: "SHOW_TAGS",
+	SHOW_TOP25: "SHOW_TOP25",
+	REMOVE_LOGIN: "REMOVE_LOGIN",
+	REMOVE_ARTICLES: "REMOVE_ARTICLES",
+	REMOVE_TAGS: "REMOVE_TAGS",
+	REMOVE_TOP25: "REMOVE_TOP25"
 }
 
-},{}],195:[function(require,module,exports){
+},{}],196:[function(require,module,exports){
 var Dispatcher = require('flux').Dispatcher;
 var assign = require('object-assign');
 
@@ -21374,7 +21458,7 @@ var AppDispatcher = assign(new Dispatcher(),{
 
 module.exports = AppDispatcher;
 
-},{"flux":54,"object-assign":57}],196:[function(require,module,exports){
+},{"flux":54,"object-assign":57}],197:[function(require,module,exports){
 var App = require('./components/App');
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -21390,7 +21474,7 @@ ReactDOM.render(
 	document.getElementById('app')
 );
 
-},{"./PageData":189,"./components/App":191,"./utils/appAPI":199,"react":188,"react-dom":59}],197:[function(require,module,exports){
+},{"./PageData":189,"./components/App":191,"./utils/appAPI":200,"react":188,"react-dom":59}],198:[function(require,module,exports){
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;
@@ -21402,7 +21486,7 @@ var CHANGE_EVENT = 'change';
 //cooper s - a state called _items
 var _pages = [];
 
-var _oneVisible = false, _twoVisible = false;
+var _articlesVisible = false, _tagsVisible = false, _top25Visible = true;
 
 
 // Method to load product data from mock API
@@ -21414,13 +21498,21 @@ function loadPageData(data) {
 
 	// Set cart visibility
 function setOneVisible(visible) {
-  _oneVisible = true;
-  _twoVisible = false;
+  _articlesVisible = true;
+	_tagsVisible = false;
+	_top25Visible = false;
 }
 
-function setTwoVisible(visible) {
-  _twoVisible = true;
-  _oneVisible = false;
+function setTagsVisible(visible) {
+  _tagsVisible = true;
+	_articlesVisible = false;
+	_top25Visible = false;
+}
+
+function setTop25Visible(visible) {
+  _top25Visible = true;
+	_articlesVisible = false;
+	_tagsVisible = false;
 }
 
 var AppStore = assign({}, EventEmitter.prototype, {
@@ -21431,13 +21523,17 @@ var AppStore = assign({}, EventEmitter.prototype, {
 	 	return "Get State...";
 	},
 	  // Return cart visibility state
-	getOneVisible: function () {
-		console.log('AppStore.getOneVisible: ' + _oneVisible );
-		return _oneVisible;
+	getArticlesVisible: function () {
+		console.log('AppStore.getArticlesVisible: ' + _articlesVisible );
+		return _articlesVisible;
 	},
-	getTwoVisible: function () {
-		console.log('AppStore.getTwoVisible: ' + _twoVisible );
-		return _twoVisible;
+	getTagsVisible: function () {
+		console.log('AppStore.getTagsVisible: ' + _tagsVisible );
+		return _tagsVisible;
+	},
+	getTop25Visible: function () {
+		console.log('AppStore.getTop25Visible: ' + _top25Visible );
+		return _top25Visible;
 	},
 	  // Set cart visibility
 	emitChange: function(){
@@ -21467,12 +21563,27 @@ AppDispatcher.register(function(payload){
 	  	  console.log("OK we have my own personal event. About now I should be changing some state: ", payload );
 	      _visible=true;
 	      setOneVisible(_visible);
-	 	break;
-	 	case 'TWO_VISIBLE':
+		 break;
+		 case 'SHOW_TAGS':
+		 console.log("Show page two: ", payload );
+		 _visible=true;
+		 setTagsVisible(_visible);
+	break;
+	case 'REMOVE_TAGS':
+	console.log("Show page two: ", payload );
+	_visible=false;
+	setTagsVisible(_visible);
+break;
+	 	case 'SHOW_TOP25':
 	  	  console.log("Show page two: ", payload );
 	      _visible=true;
-	      setTwoVisible(_visible);
-	 	break
+	      setTop25Visible(_visible);
+		 break;
+		 case 'REMOVE_TOP25':
+		 console.log("Show page two: ", payload );
+		 _visible=false;
+		 setTop25Visible(_visible);
+	break;
 
 
 	}//end switch
@@ -21483,7 +21594,7 @@ AppDispatcher.register(function(payload){
 
 module.exports = AppStore;
 
-},{"../constants/AppConstants":194,"../dispatcher/AppDispatcher":195,"../utils/AppAPI.js":198,"events":26,"object-assign":57}],198:[function(require,module,exports){
+},{"../constants/AppConstants":195,"../dispatcher/AppDispatcher":196,"../utils/AppAPI.js":199,"events":26,"object-assign":57}],199:[function(require,module,exports){
 var AppActions = require('../actions/AppActions');
 var axios = require('axios');
 
@@ -21493,22 +21604,21 @@ module.exports = {
   getPageData: function () {
   	console.log("appAPI.getPageData...");
   	// Performing a GET request
-	axios.get('http://digitest-authorize.rhcloud.com/mega-data')
+/* axios.get('http://digitest-authorize.rhcloud.com/mega-data')
 	  .then(function(response){
 	    console.log("appAPI.getPageData: " ,response.data); // ex.: { user: 'Your User'}
 	    console.log(response.status); // ex.: 200
 
 	    var data = response.data;
     	AppActions.loadPages(data);
-	  });
-
+	  }); */
     //var data = JSON.parse(localStorage.getItem('page'));
     //AppActions.loadPages(data);
   }
 
 }; //end exports
 
-},{"../actions/AppActions":190,"axios":1}],199:[function(require,module,exports){
+},{"../actions/AppActions":190,"axios":1}],200:[function(require,module,exports){
 var AppActions = require('../actions/AppActions');
 var axios = require('axios');
 
@@ -21518,19 +21628,18 @@ module.exports = {
   getPageData: function () {
   	console.log("appAPI.getPageData...");
   	// Performing a GET request
-	axios.get('http://digitest-authorize.rhcloud.com/mega-data')
+/* axios.get('http://digitest-authorize.rhcloud.com/mega-data')
 	  .then(function(response){
 	    console.log("appAPI.getPageData: " ,response.data); // ex.: { user: 'Your User'}
 	    console.log(response.status); // ex.: 200
 
 	    var data = response.data;
     	AppActions.loadPages(data);
-	  });
-
+	  }); */
     //var data = JSON.parse(localStorage.getItem('page'));
     //AppActions.loadPages(data);
   }
 
 }; //end exports
 
-},{"../actions/AppActions":190,"axios":1}]},{},[196]);
+},{"../actions/AppActions":190,"axios":1}]},{},[197]);

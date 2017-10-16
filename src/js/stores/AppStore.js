@@ -9,7 +9,7 @@ var CHANGE_EVENT = 'change';
 //cooper s - a state called _items
 var _pages = [];
 
-var _oneVisible = false, _twoVisible = false;
+var _articlesVisible = false, _tagsVisible = false, _top25Visible = true;
 
 
 // Method to load product data from mock API
@@ -21,13 +21,21 @@ function loadPageData(data) {
 
 	// Set cart visibility
 function setOneVisible(visible) {
-  _oneVisible = true;
-  _twoVisible = false;
+  _articlesVisible = true;
+	_tagsVisible = false;
+	_top25Visible = false;
 }
 
-function setTwoVisible(visible) {
-  _twoVisible = true;
-  _oneVisible = false;
+function setTagsVisible(visible) {
+  _tagsVisible = true;
+	_articlesVisible = false;
+	_top25Visible = false;
+}
+
+function setTop25Visible(visible) {
+  _top25Visible = true;
+	_articlesVisible = false;
+	_tagsVisible = false;
 }
 
 var AppStore = assign({}, EventEmitter.prototype, {
@@ -38,13 +46,17 @@ var AppStore = assign({}, EventEmitter.prototype, {
 	 	return "Get State...";
 	},
 	  // Return cart visibility state
-	getOneVisible: function () {
-		console.log('AppStore.getOneVisible: ' + _oneVisible );
-		return _oneVisible;
+	getArticlesVisible: function () {
+		console.log('AppStore.getArticlesVisible: ' + _articlesVisible );
+		return _articlesVisible;
 	},
-	getTwoVisible: function () {
-		console.log('AppStore.getTwoVisible: ' + _twoVisible );
-		return _twoVisible;
+	getTagsVisible: function () {
+		console.log('AppStore.getTagsVisible: ' + _tagsVisible );
+		return _tagsVisible;
+	},
+	getTop25Visible: function () {
+		console.log('AppStore.getTop25Visible: ' + _top25Visible );
+		return _top25Visible;
 	},
 	  // Set cart visibility
 	emitChange: function(){
@@ -74,12 +86,27 @@ AppDispatcher.register(function(payload){
 	  	  console.log("OK we have my own personal event. About now I should be changing some state: ", payload );
 	      _visible=true;
 	      setOneVisible(_visible);
-	 	break;
-	 	case 'TWO_VISIBLE':
+		 break;
+		 case 'SHOW_TAGS':
+		 console.log("Show page two: ", payload );
+		 _visible=true;
+		 setTagsVisible(_visible);
+	break;
+	case 'REMOVE_TAGS':
+	console.log("Show page two: ", payload );
+	_visible=false;
+	setTagsVisible(_visible);
+break;
+	 	case 'SHOW_TOP25':
 	  	  console.log("Show page two: ", payload );
 	      _visible=true;
-	      setTwoVisible(_visible);
-	 	break
+	      setTop25Visible(_visible);
+		 break;
+		 case 'REMOVE_TOP25':
+		 console.log("Show page two: ", payload );
+		 _visible=false;
+		 setTop25Visible(_visible);
+	break;
 
 
 	}//end switch
